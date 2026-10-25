@@ -215,7 +215,7 @@ Coverage includes file integrity, schema consistency, data range validity, deriv
 ### Setup & Execution
 ```bash
 # 1. Clone repository
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/tusharymarathe-cmyk/ecommerce-sales-analysis.git
 cd ecommerce-sales-analysis
 
 # 2. Install dependencies
@@ -240,6 +240,7 @@ python src/create_report.py
 
 ## 13. Author & License
 
-- **Author**: Student / Data Analytics Intern
+- **Author**: Tushar Marathe ([@tusharymarathe-cmyk](https://github.com/tusharymarathe-cmyk))
+- **Repository**: [https://github.com/tusharymarathe-cmyk/ecommerce-sales-analysis](https://github.com/tusharymarathe-cmyk/ecommerce-sales-analysis)
 - **Assignment**: Week 6 Final Data Analytics Project
 - **License**: MIT License - Free for educational and analytical use.
