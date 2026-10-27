@@ -17,15 +17,32 @@ Output:
 
 import os
 import sys
+import shutil
 import pandas as pd
 import numpy as np
 from datetime import datetime
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 # ── Path Configuration ─────────────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAW_DIR = os.path.join(BASE_DIR, 'data', 'raw')
+PROCESSED_DIR = os.path.join(BASE_DIR, 'data', 'processed')
+os.makedirs(RAW_DIR, exist_ok=True)
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+
 RAW_DATA_PATH = os.path.join(BASE_DIR, 'data', 'raw_sales_data.csv')
+RAW_DATA_ALT_PATH = os.path.join(RAW_DIR, 'raw_sales_data.csv')
 CLEAN_DATA_PATH = os.path.join(BASE_DIR, 'data', 'cleaned_sales.csv')
+CLEAN_DATA_ALT_PATH = os.path.join(PROCESSED_DIR, 'cleaned_sales.csv')
 REPORT_PATH = os.path.join(BASE_DIR, 'reports', 'data_cleaning_summary.md')
+
+# Ensure raw folder has copy of raw data
+if os.path.exists(RAW_DATA_PATH) and not os.path.exists(RAW_DATA_ALT_PATH):
+    shutil.copy2(RAW_DATA_PATH, RAW_DATA_ALT_PATH)
 
 os.makedirs(os.path.join(BASE_DIR, 'reports'), exist_ok=True)
 
@@ -169,7 +186,7 @@ def identify_column_types(df):
     """Identify and log numerical vs categorical columns."""
     log("=== COLUMN TYPE IDENTIFICATION ===")
     numerical_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-    categorical_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    categorical_cols = df.select_dtypes(include=['object', 'category', 'string']).columns.tolist()
     date_cols = df.select_dtypes(include=['datetime64']).columns.tolist()
 
     log(f"  Numerical columns ({len(numerical_cols)}): {numerical_cols}")
@@ -447,15 +464,17 @@ def main():
     # Validate
     final_info = final_validation(df_cleaned)
 
-    # Save cleaned dataset
+    # Save cleaned dataset to both standard locations
     df_cleaned.to_csv(CLEAN_DATA_PATH, index=False)
-    log(f"\n✅ Cleaned dataset saved to: {CLEAN_DATA_PATH}")
+    df_cleaned.to_csv(CLEAN_DATA_ALT_PATH, index=False)
+    log(f"\n[OK] Cleaned dataset saved to: {CLEAN_DATA_PATH}")
+    log(f"[OK] Cleaned dataset copy saved to: {CLEAN_DATA_ALT_PATH}")
 
     # Generate report
     report_text = generate_report(initial_info, missing_before, n_dups, cleaning_report, final_info)
     with open(REPORT_PATH, 'w', encoding='utf-8') as f:
         f.write(report_text)
-    log(f"✅ Cleaning summary saved to: {REPORT_PATH}")
+    log(f"[OK] Cleaning summary saved to: {REPORT_PATH}")
 
     log("\n" + "=" * 60)
     log("DATA CLEANING COMPLETE")
