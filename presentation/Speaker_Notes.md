@@ -1,12 +1,13 @@
 # Speaker Notes — Final Project Presentation
 ## E-Commerce Sales Analysis | Week 6 Internship Assignment
+**Student:** Tushar Marathe | **Organization:** Internova
 
 ---
 
 ## Slide 1: Project Title and Introduction
 
 **What to say:**
-"Good morning / afternoon everyone. My name is [Your Name], and today I'll be presenting my Week 6 Internship Assignment — an end-to-end data analytics capstone project titled 'E-Commerce Sales Data Analysis and Interactive Power BI Dashboard.'
+"Good morning / afternoon everyone. My name is Tushar Marathe, and today I'll be presenting my Week 6 Internship Assignment for Internova — an end-to-end data analytics capstone project titled 'Sales and E-Commerce Performance Analytics Dashboard.'
 
 This project uses a synthetic dataset that simulates real retail sales data to build a complete analytics pipeline — from data cleaning through exploratory analysis, visualizations, a Power BI dashboard, and business recommendations.
 

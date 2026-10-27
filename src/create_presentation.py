@@ -5,6 +5,13 @@ Generates the Final_Project_Presentation.pptx programmatically
 using python-pptx.
 """
 import os
+import sys
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 from pptx import Presentation
 from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
@@ -13,6 +20,7 @@ import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PPTX_PATH = os.path.join(BASE_DIR, 'presentation', 'Final_Project_Presentation.pptx')
+PPTX_ALT_PATH = os.path.join(BASE_DIR, 'presentation', 'final_project_presentation.pptx')
 NOTES_PATH = os.path.join(BASE_DIR, 'presentation', 'Speaker_Notes.md')
 VIZ_DIR = os.path.join(BASE_DIR, 'visualizations')
 CLEAN_PATH = os.path.join(BASE_DIR, 'data', 'cleaned_sales.csv')
@@ -117,7 +125,7 @@ add_text(slide1, "and Interactive Power BI Dashboard", 0.5, 2.1, 12.3, 0.8,
 add_rect(slide1, 3.5, 3.6, 6.33, 0.06, fill_color=ACCENT_ORANGE)
 add_text(slide1, "Week 6 Internship Assignment — Data Analytics Capstone Project", 0.5, 3.8,
          12.3, 0.6, font_size=16, color=WHITE, align=PP_ALIGN.CENTER)
-add_text(slide1, "Student: [Your Name] | October 2026", 0.5, 4.5, 12.3, 0.5,
+add_text(slide1, "Student: Tushar Marathe | Organization: Internova | October 2026", 0.5, 4.5, 12.3, 0.5,
          font_size=14, color=ACCENT_BLUE, align=PP_ALIGN.CENTER)
 add_text(slide1, "Tools: Python | Pandas | Matplotlib | Seaborn | Power BI | Git/GitHub", 0.5,
          5.2, 12.3, 0.5, font_size=13, color=WHITE, align=PP_ALIGN.CENTER)
@@ -464,19 +472,22 @@ add_text(slide10, "Thank you!",
 
 # ── Save ───────────────────────────────────────────────────────────────────────
 prs.save(PPTX_PATH)
+prs.save(PPTX_ALT_PATH)
 print(f"[OK] Presentation saved: {PPTX_PATH}")
+print(f"[OK] Alternate copy saved: {PPTX_ALT_PATH}")
 print(f"     Slides: {len(prs.slides)}")
 
 # ── Speaker Notes ──────────────────────────────────────────────────────────────
 notes_text = f"""# Speaker Notes — Final Project Presentation
 ## E-Commerce Sales Analysis | Week 6 Internship Assignment
+**Student:** Tushar Marathe | **Organization:** Internova
 
 ---
 
 ## Slide 1: Project Title and Introduction
 
 **What to say:**
-"Good morning / afternoon everyone. My name is [Your Name], and today I'll be presenting my Week 6 Internship Assignment — an end-to-end data analytics capstone project titled 'E-Commerce Sales Data Analysis and Interactive Power BI Dashboard.'
+"Good morning / afternoon everyone. My name is Tushar Marathe, and today I'll be presenting my Week 6 Internship Assignment for Internova — an end-to-end data analytics capstone project titled 'Sales and E-Commerce Performance Analytics Dashboard.'
 
 This project uses a synthetic dataset that simulates real retail sales data to build a complete analytics pipeline — from data cleaning through exploratory analysis, visualizations, a Power BI dashboard, and business recommendations.
 

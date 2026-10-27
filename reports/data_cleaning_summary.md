@@ -1,7 +1,7 @@
 # Data Cleaning Summary Report
 ## E-Commerce Sales Analysis Project — Week 6 Internship Assignment
 
-**Generated:** October 25, 2026 at 13:04  
+**Generated:** October 27, 2026 at 16:31  
 **Script:** `src/data_cleaning.py`  
 **Input file:** `data/raw_sales_data.csv`  
 **Output file:** `data/cleaned_sales.csv`
@@ -79,74 +79,75 @@ This cleaning process is fully reproducible:
 ## 9. Data Cleaning Log
 
 ```
-[INFO] 13:04:08 | ============================================================
-[INFO] 13:04:08 | E-COMMERCE SALES DATA CLEANING — WEEK 6 ASSIGNMENT
-[INFO] 13:04:08 | ============================================================
-[INFO] 13:04:08 | Loading dataset from: C:\Users\TUSHAR MARATHE\OneDrive\Documents\ai pROJECT\ecommerce-sales-analysis\data\raw_sales_data.csv
-[INFO] 13:04:08 | Dataset loaded successfully. Shape: (9997, 21)
-[INFO] 13:04:08 | === INITIAL INSPECTION ===
-[INFO] 13:04:08 | Shape: 9,997 rows × 21 columns
-[INFO] 13:04:08 | Columns: ['Row ID', 'Order ID', 'Order Date', 'Ship Date', 'Ship Mode', 'Customer ID', 'Customer Name', 'Segment', 'Country', 'City', 'State', 'Postal Code', 'Region', 'Product ID', 'Category', 'Sub-Category', 'Product Name', 'Sales', 'Quantity', 'Discount', 'Profit']
-[INFO] 13:04:08 | Memory usage: 9.12 MB
-[INFO] 13:04:08 |   Column: 'Row ID' | dtype: int64
-[INFO] 13:04:08 |   Column: 'Order ID' | dtype: str
-[INFO] 13:04:08 |   Column: 'Order Date' | dtype: str
-[INFO] 13:04:08 |   Column: 'Ship Date' | dtype: str
-[INFO] 13:04:08 |   Column: 'Ship Mode' | dtype: str
-[INFO] 13:04:08 |   Column: 'Customer ID' | dtype: str
-[INFO] 13:04:08 |   Column: 'Customer Name' | dtype: str
-[INFO] 13:04:08 |   Column: 'Segment' | dtype: str
-[INFO] 13:04:08 |   Column: 'Country' | dtype: str
-[INFO] 13:04:08 |   Column: 'City' | dtype: str
-[INFO] 13:04:08 |   Column: 'State' | dtype: str
-[INFO] 13:04:08 |   Column: 'Postal Code' | dtype: int64
-[INFO] 13:04:08 |   Column: 'Region' | dtype: str
-[INFO] 13:04:08 |   Column: 'Product ID' | dtype: str
-[INFO] 13:04:08 |   Column: 'Category' | dtype: str
-[INFO] 13:04:08 |   Column: 'Sub-Category' | dtype: str
-[INFO] 13:04:08 |   Column: 'Product Name' | dtype: str
-[INFO] 13:04:08 |   Column: 'Sales' | dtype: float64
-[INFO] 13:04:08 |   Column: 'Quantity' | dtype: int64
-[INFO] 13:04:08 |   Column: 'Discount' | dtype: float64
-[INFO] 13:04:08 |   Column: 'Profit' | dtype: float64
-[INFO] 13:04:08 | === MISSING VALUE ANALYSIS ===
-[INFO] 13:04:08 |   'Ship Date': 12 missing (0.12%)
-[INFO] 13:04:08 | === DUPLICATE DETECTION ===
-[INFO] 13:04:08 | Exact duplicate rows found: 3
-[INFO] 13:04:08 | === DATE PARSING AND VALIDATION ===
-[INFO] 13:04:08 |   'Order Date' parsed with format '%d/%m/%Y'. Unparseable values: 0
-[INFO] 13:04:08 |   'Ship Date' parsed with format '%d/%m/%Y'. Unparseable values: 0
-[INFO] 13:04:08 |   Records where Ship Date < Order Date: 0
-[INFO] 13:04:08 | === COLUMN TYPE IDENTIFICATION ===
-[INFO] 13:04:08 |   Numerical columns (6): ['Row ID', 'Postal Code', 'Sales', 'Quantity', 'Discount', 'Profit']
-[INFO] 13:04:08 |   Categorical columns (13): ['Order ID', 'Ship Mode', 'Customer ID', 'Customer Name', 'Segment', 'Country', 'City', 'State', 'Region', 'Product ID', 'Category', 'Sub-Category', 'Product Name']
-[INFO] 13:04:08 |   Date columns (2): ['Order Date', 'Ship Date']
-[INFO] 13:04:08 | === INVALID RECORD DETECTION ===
-[INFO] 13:04:08 |   Records with Sales <= 0: 0
-[INFO] 13:04:08 |   Records with Quantity <= 0: 0
-[INFO] 13:04:08 |   Records with Discount outside [0, 1]: 0
-[INFO] 13:04:08 |   Potential Profit outliers (±3×IQR): 1,733
-[INFO] 13:04:08 | === CLEANING OPERATIONS ===
-[INFO] 13:04:08 |   [CLEAN] Removed 3 exact duplicate rows.
-[INFO] 13:04:08 |   [RETAIN] 12 records with NULL Ship Date retained (represent unshipped orders).
-[INFO] 13:04:08 |   [CLEAN] Removed 0 records with Sales <= 0.
-[INFO] 13:04:08 |   [CLEAN] Removed 0 records with Quantity <= 0.
-[INFO] 13:04:08 |   [CLEAN] Clipped 0 Discount values to [0, 1] range.
-[INFO] 13:04:08 |   [CLEAN] Stripped whitespace from string columns.
-[INFO] 13:04:08 |   [ADD] Derived temporal features: Year, Month, Quarter.
-[INFO] 13:04:08 |   [ADD] Derived feature: Profit Margin %
-[INFO] 13:04:08 | === FINAL VALIDATION ===
-[INFO] 13:04:08 |   Final shape: 9,994 rows × 26 columns
-[INFO] 13:04:08 |   Remaining missing values: 12
-[INFO] 13:04:08 |   Date range: 2020-01-01 to 2023-12-31
-[INFO] 13:04:08 |   Sales range: $3.38 to $61198.74
-[INFO] 13:04:08 |   Unique Order IDs: 9,070
-[INFO] 13:04:08 |   Unique Customers: 800
-[INFO] 13:04:08 |   Categories: ['Office Supplies', 'Furniture', 'Technology']
-[INFO] 13:04:08 |   Regions: ['Central', 'East', 'West', 'South']
-[INFO] 13:04:08 |   Segments: ['Home Office', 'Consumer', 'Corporate']
-[INFO] 13:04:08 | 
-✅ Cleaned dataset saved to: C:\Users\TUSHAR MARATHE\OneDrive\Documents\ai pROJECT\ecommerce-sales-analysis\data\cleaned_sales.csv
+[INFO] 16:31:05 | ============================================================
+[INFO] 16:31:05 | E-COMMERCE SALES DATA CLEANING — WEEK 6 ASSIGNMENT
+[INFO] 16:31:05 | ============================================================
+[INFO] 16:31:05 | Loading dataset from: C:\Users\TUSHAR MARATHE\OneDrive\Documents\ai pROJECT\ecommerce-sales-analysis\data\raw_sales_data.csv
+[INFO] 16:31:06 | Dataset loaded successfully. Shape: (9997, 21)
+[INFO] 16:31:06 | === INITIAL INSPECTION ===
+[INFO] 16:31:06 | Shape: 9,997 rows × 21 columns
+[INFO] 16:31:06 | Columns: ['Row ID', 'Order ID', 'Order Date', 'Ship Date', 'Ship Mode', 'Customer ID', 'Customer Name', 'Segment', 'Country', 'City', 'State', 'Postal Code', 'Region', 'Product ID', 'Category', 'Sub-Category', 'Product Name', 'Sales', 'Quantity', 'Discount', 'Profit']
+[INFO] 16:31:06 | Memory usage: 9.12 MB
+[INFO] 16:31:06 |   Column: 'Row ID' | dtype: int64
+[INFO] 16:31:06 |   Column: 'Order ID' | dtype: str
+[INFO] 16:31:06 |   Column: 'Order Date' | dtype: str
+[INFO] 16:31:06 |   Column: 'Ship Date' | dtype: str
+[INFO] 16:31:06 |   Column: 'Ship Mode' | dtype: str
+[INFO] 16:31:06 |   Column: 'Customer ID' | dtype: str
+[INFO] 16:31:06 |   Column: 'Customer Name' | dtype: str
+[INFO] 16:31:06 |   Column: 'Segment' | dtype: str
+[INFO] 16:31:06 |   Column: 'Country' | dtype: str
+[INFO] 16:31:06 |   Column: 'City' | dtype: str
+[INFO] 16:31:06 |   Column: 'State' | dtype: str
+[INFO] 16:31:06 |   Column: 'Postal Code' | dtype: int64
+[INFO] 16:31:06 |   Column: 'Region' | dtype: str
+[INFO] 16:31:06 |   Column: 'Product ID' | dtype: str
+[INFO] 16:31:06 |   Column: 'Category' | dtype: str
+[INFO] 16:31:06 |   Column: 'Sub-Category' | dtype: str
+[INFO] 16:31:06 |   Column: 'Product Name' | dtype: str
+[INFO] 16:31:06 |   Column: 'Sales' | dtype: float64
+[INFO] 16:31:06 |   Column: 'Quantity' | dtype: int64
+[INFO] 16:31:06 |   Column: 'Discount' | dtype: float64
+[INFO] 16:31:06 |   Column: 'Profit' | dtype: float64
+[INFO] 16:31:06 | === MISSING VALUE ANALYSIS ===
+[INFO] 16:31:06 |   'Ship Date': 12 missing (0.12%)
+[INFO] 16:31:06 | === DUPLICATE DETECTION ===
+[INFO] 16:31:06 | Exact duplicate rows found: 3
+[INFO] 16:31:06 | === DATE PARSING AND VALIDATION ===
+[INFO] 16:31:06 |   'Order Date' parsed with format '%d/%m/%Y'. Unparseable values: 0
+[INFO] 16:31:06 |   'Ship Date' parsed with format '%d/%m/%Y'. Unparseable values: 0
+[INFO] 16:31:06 |   Records where Ship Date < Order Date: 0
+[INFO] 16:31:06 | === COLUMN TYPE IDENTIFICATION ===
+[INFO] 16:31:06 |   Numerical columns (6): ['Row ID', 'Postal Code', 'Sales', 'Quantity', 'Discount', 'Profit']
+[INFO] 16:31:06 |   Categorical columns (13): ['Order ID', 'Ship Mode', 'Customer ID', 'Customer Name', 'Segment', 'Country', 'City', 'State', 'Region', 'Product ID', 'Category', 'Sub-Category', 'Product Name']
+[INFO] 16:31:06 |   Date columns (2): ['Order Date', 'Ship Date']
+[INFO] 16:31:06 | === INVALID RECORD DETECTION ===
+[INFO] 16:31:06 |   Records with Sales <= 0: 0
+[INFO] 16:31:06 |   Records with Quantity <= 0: 0
+[INFO] 16:31:06 |   Records with Discount outside [0, 1]: 0
+[INFO] 16:31:06 |   Potential Profit outliers (±3×IQR): 1,733
+[INFO] 16:31:06 | === CLEANING OPERATIONS ===
+[INFO] 16:31:06 |   [CLEAN] Removed 3 exact duplicate rows.
+[INFO] 16:31:06 |   [RETAIN] 12 records with NULL Ship Date retained (represent unshipped orders).
+[INFO] 16:31:06 |   [CLEAN] Removed 0 records with Sales <= 0.
+[INFO] 16:31:06 |   [CLEAN] Removed 0 records with Quantity <= 0.
+[INFO] 16:31:06 |   [CLEAN] Clipped 0 Discount values to [0, 1] range.
+[INFO] 16:31:06 |   [CLEAN] Stripped whitespace from string columns.
+[INFO] 16:31:06 |   [ADD] Derived temporal features: Year, Month, Quarter.
+[INFO] 16:31:06 |   [ADD] Derived feature: Profit Margin %
+[INFO] 16:31:06 | === FINAL VALIDATION ===
+[INFO] 16:31:06 |   Final shape: 9,994 rows × 26 columns
+[INFO] 16:31:06 |   Remaining missing values: 12
+[INFO] 16:31:06 |   Date range: 2020-01-01 to 2023-12-31
+[INFO] 16:31:06 |   Sales range: $3.38 to $61198.74
+[INFO] 16:31:06 |   Unique Order IDs: 9,070
+[INFO] 16:31:06 |   Unique Customers: 800
+[INFO] 16:31:06 |   Categories: ['Office Supplies', 'Furniture', 'Technology']
+[INFO] 16:31:06 |   Regions: ['Central', 'East', 'West', 'South']
+[INFO] 16:31:06 |   Segments: ['Home Office', 'Consumer', 'Corporate']
+[INFO] 16:31:06 | 
+[OK] Cleaned dataset saved to: C:\Users\TUSHAR MARATHE\OneDrive\Documents\ai pROJECT\ecommerce-sales-analysis\data\cleaned_sales.csv
+[INFO] 16:31:06 | [OK] Cleaned dataset copy saved to: C:\Users\TUSHAR MARATHE\OneDrive\Documents\ai pROJECT\ecommerce-sales-analysis\data\processed\cleaned_sales.csv
 ```
 
 ---

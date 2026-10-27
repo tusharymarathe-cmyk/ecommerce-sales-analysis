@@ -1,8 +1,12 @@
-# Business Insights and Recommendations
-## E-Commerce Sales Analysis Project — Week 6 Internship Assignment
+# Business Insights and Strategic Recommendations
+## Sales and E-Commerce Performance Analytics Dashboard
 
-**Generated From:** Synthetic dataset analysis (9,994 transaction records, Jan 2020 – Dec 2023)  
-**⚠️ Note:** All figures are derived from synthetic data for educational purposes.
+**Student Name:** Tushar Marathe  
+**Internship Organization:** Internova  
+**Domain:** Data Analytics  
+**Assignment:** Week 6 Final Project  
+**Generated From:** Calibrated dataset analysis (9,994 transaction records, Jan 2020 – Dec 2023)  
+**⚠️ Note:** All figures are derived from calibrated synthetic data for educational purposes.
 
 ---
 

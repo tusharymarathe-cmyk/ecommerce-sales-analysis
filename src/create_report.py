@@ -4,9 +4,15 @@ create_report.py
 Generates the Final_Data_Analytics_Project_Report.pdf
 using reportlab.
 """
-import os, sys
+import os, sys, shutil
 import pandas as pd
 import numpy as np
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 from datetime import datetime
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -20,6 +26,7 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PDF_PATH = os.path.join(BASE_DIR, 'reports', 'Final_Data_Analytics_Project_Report.pdf')
+PDF_ALT_PATH = os.path.join(BASE_DIR, 'reports', 'final_project_report.pdf')
 VIZ_DIR = os.path.join(BASE_DIR, 'visualizations')
 CLEAN_PATH = os.path.join(BASE_DIR, 'data', 'cleaned_sales.csv')
 os.makedirs(os.path.dirname(PDF_PATH), exist_ok=True)
@@ -142,13 +149,15 @@ story += [
     sp(2),
     tbl(
         [["Field", "Details"],
-         ["Student Name", "[Your Name]"],
+         ["Student Name", "Tushar Marathe"],
+         ["Internship Organization", "Internova"],
+         ["Internship Domain", "Data Analytics"],
          ["Assignment", "Week 6: Git, GitHub & Final Data Analytics Project"],
-         ["Total Marks", "100"],
+         ["Maximum Marks", "100"],
          ["Duration", "7 Days"],
          ["Submission Date", datetime.now().strftime("%B %d, %Y")],
          ["Report Generated", datetime.now().strftime("%B %d, %Y at %H:%M")],
-         ["Dataset Type", "Synthetic (Superstore-style, 9,994 records)"],
+         ["Dataset Type", "Synthetic (Superstore-calibrated, 9,994 records)"],
          ["Tools Used", "Python, Pandas, NumPy, Matplotlib, Seaborn, Power BI, Git"]],
         col_widths=[6*cm, 11*cm]
     ),
@@ -846,6 +855,8 @@ story += [
 
 # Build PDF
 doc.build(story)
+shutil.copy2(PDF_PATH, PDF_ALT_PATH)
 print(f"[OK] PDF report generated: {PDF_PATH}")
+print(f"[OK] Alternate copy saved: {PDF_ALT_PATH}")
 size_mb = os.path.getsize(PDF_PATH) / 1024 / 1024
 print(f"     Size: {size_mb:.2f} MB")
